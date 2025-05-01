@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@layouts/MainLayout.astro';
+import Hero from '@components/Hero.astro';
+
+export async function getStaticPaths() {
+  const servicesEntries = await getCollection('services');
+  return servicesEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<MainLayout title={`${entry.data.title} | McKinsey Digital`}>
+  <Hero title={entry.data.title} backgroundImage={entry.data.image} />
+  
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl prose prose-lg">
+      <Content />
+    </div>
+  </section>
+</MainLayout>
+```

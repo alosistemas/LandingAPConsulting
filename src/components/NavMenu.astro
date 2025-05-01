@@ -1,0 +1,24 @@
+---
+const navItems = [
+  { name: 'How We Help Clients', url: '/services' },
+  { name: 'Our Insights', url: '/insights' },
+  { name: 'Our People', url: '/people' },
+  { name: 'Case Studies', url: '/case-studies' },
+  { name: 'Contact Us', url: '/contact' },
+];
+---
+
+<nav class="hidden md:block">
+  <ul class="flex space-x-6">
+    {navItems.map(item => (
+      <li>
+        <a 
+          href={item.url} 
+          class="text-gray-700 hover:text-mckinsey-blue text-sm font-medium py-2 border-b-2 border-transparent hover:border-mckinsey-blue transition-colors duration-200"
+        >
+          {item.name}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

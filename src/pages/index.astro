@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@layouts/MainLayout.astro';
+import Hero from '@components/Hero.astro';
+
+// Obtener servicios y insights para mostrar en la página principal
+const services = await getCollection('services');
+const insights = await getCollection('insights');
+
+// Ordenar servicios por el campo order
+const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
+// Ordenar insights por fecha de publicación, más recientes primero
+const recentInsights = insights.sort((a, b) => 
+  b.data.publishDate.getTime() - a.data.publishDate.getTime()
+).slice(0, 3);
+---
+
+<MainLayout title="McKinsey Digital - Creando valor más allá del hype">
+  <Hero title="Creando valor más allá del hype" />
+  
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-serif font-bold mb-12">Cómo Ayudamos a Nuestros Clientes</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {sortedServices.map(service => (
+          <div class="bg-mckinsey-gray rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
+            <h3 class="text-2xl font-serif font-bold mb-3">{service.data.title}</h3>
+            <p class="text-gray-700 mb-4">{service.data.description}</p>
+            <a href={`/services/${service.slug}`} class="text-mckinsey-blue font-medium hover:underline">
+              Saber más →
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16 bg-mckinsey-gray">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-serif font-bold mb-12">Nuestros Insights</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {recentInsights.map(insight => (
+          <div class="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            {insight.data.image && (
+              <div class="h-48 overflow-hidden">
+                <img 
+                  src={insight.data.image} 
+                  alt={insight.data.title} 
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <div class="p-6">
+              <h3 class="text-xl font-serif font-bold mb-3">{insight.data.title}</h3>
+              <p class="text-gray-700 mb-4">{insight.data.description}</p>
+              <a href={`/insights/${insight.slug}`} class="text-mckinsey-blue font-medium hover:underline">
+                Leer más →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>

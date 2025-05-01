@@ -1,0 +1,39 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-mckinsey-blue text-white py-12">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="font-serif text-xl mb-4">McKinsey Digital</h3>
+        <p class="text-sm text-gray-300">Ayudamos a los clientes a desbloquear el poder de la IA a escala.</p>
+      </div>
+      <div>
+        <h4 class="font-medium mb-3">Servicios</h4>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><a href="/services/digital-transformation" class="hover:text-white">Transformación Digital</a></li>
+          <li><a href="/services/ai-scale" class="hover:text-white">IA a Escala</a></li>
+          <li><a href="/services/digital-strategy" class="hover:text-white">Estrategia Digital</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-medium mb-3">Insights</h4>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><a href="/insights/ai-trends" class="hover:text-white">Tendencias en IA</a></li>
+          <li><a href="/insights/digital-future" class="hover:text-white">El Futuro Digital</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-medium mb-3">Conectar</h4>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><a href="/contact" class="hover:text-white">Contacto</a></li>
+          <li><a href="/careers" class="hover:text-white">Carreras</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-8 text-sm text-gray-300">
+      <p>&copy; {currentYear} McKinsey Digital. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

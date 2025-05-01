@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '@layouts/MainLayout.astro';
+import Hero from '@components/Hero.astro';
+
+export async function getStaticPaths() {
+  const insightsEntries = await getCollection('insights');
+  return insightsEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const formattedDate = new Intl.DateTimeFormat('es', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(entry.data.publishDate);
+---
+
+<MainLayout title={`${entry.data.title} | McKinsey Digital`}>
+  <Hero title={entry.data.title} backgroundImage={entry.data.image} />
+  
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="mb-8 text-gray-500">
+        Publicado el {formattedDate}
+      </div>
+      
+      <div class="prose prose-lg">
+        <Content />
+      </div>
+    </div>
+  </section>
+</MainLayout>
