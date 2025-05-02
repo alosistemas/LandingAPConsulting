@@ -1,66 +1,173 @@
 ---
-import { getCollection } from 'astro:content';
-import MainLayout from '@layouts/MainLayout.astro';
-import Hero from '@components/Hero.astro';
+import { getCollection } from "astro:content";
+import MainLayout from "@layouts/MainLayout.astro";
+import Hero from "@components/Hero.astro";
 
 // Obtener servicios y insights para mostrar en la página principal
-const services = await getCollection('services');
-const insights = await getCollection('insights');
+const services = await getCollection("services");
+const insights = await getCollection("insights");
 
 // Ordenar servicios por el campo order
 const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
 // Ordenar insights por fecha de publicación, más recientes primero
-const recentInsights = insights.sort((a, b) => 
-  b.data.publishDate.getTime() - a.data.publishDate.getTime()
-).slice(0, 3);
+const recentInsights = insights
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
 ---
 
 <MainLayout title="McKinsey Digital - Creando valor más allá del hype">
   <Hero title="Creando valor más allá del hype" />
-  
-  <section class="py-16 bg-white">
+
+  <section
+    class="py-16 bg-gradient-to-r from-indigo-100 via-blue-200 to-indigo-100"
+  >
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-serif font-bold mb-12">Cómo Ayudamos a Nuestros Clientes</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {sortedServices.map(service => (
-          <div class="bg-mckinsey-gray rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
-            <h3 class="text-2xl font-serif font-bold mb-3">{service.data.title}</h3>
-            <p class="text-gray-700 mb-4">{service.data.description}</p>
-            <a href={`/services/${service.slug}`} class="text-mckinsey-blue font-medium hover:underline">
-              Saber más →
-            </a>
-          </div>
-        ))}
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-serif font-bold text-gray-900 mb-6">
+          Transformando negocios con estrategia digital de clase mundial
+        </h2>
+        <p class="text-lg text-gray-800">
+          Combinamos el profundo conocimiento sectorial de McKinsey con
+          capacidades digitales avanzadas para generar impacto real y duradero.
+        </p>
       </div>
     </div>
   </section>
-  
-  <section class="py-16 bg-mckinsey-gray">
+
+  <section class="py-20 bg-gradient-to-b from-gray-100 to-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-serif font-bold mb-12">Nuestros Insights</h2>
-      
+      <div
+        class="flex flex-col md:flex-row md:items-center md:justify-between mb-12"
+      >
+        <h2 class="text-4xl font-serif font-bold text-gray-800 mb-4 md:mb-0">
+          Cómo Ayudamos a Nuestros Clientes
+        </h2>
+        <a
+          href="/services"
+          class="text-mckinsey-blue hover:text-blue-700 font-medium flex items-center"
+        >
+          Ver todos los servicios
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 ml-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {recentInsights.map(insight => (
-          <div class="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            {insight.data.image && (
-              <div class="h-48 overflow-hidden">
-                <img 
-                  src={insight.data.image} 
-                  alt={insight.data.title} 
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            )}
-            <div class="p-6">
-              <h3 class="text-xl font-serif font-bold mb-3">{insight.data.title}</h3>
-              <p class="text-gray-700 mb-4">{insight.data.description}</p>
-              <a href={`/insights/${insight.slug}`} class="text-mckinsey-blue font-medium hover:underline">
-                Leer más →
+        {
+          sortedServices.map((service, index) => (
+            <div class="bg-white rounded-xl p-8 border border-gray-200 hover:shadow-2xl transition duration-300 group relative overflow-hidden">
+              <div class="absolute top-0 left-0 w-2 h-full bg-mckinsey-blue opacity-75" />
+              <h3 class="text-2xl font-serif font-bold mb-4 text-gray-800">
+                {service.data.title}
+              </h3>
+              <p class="text-gray-600 mb-6">{service.data.description}</p>
+              <a
+                href={`/services/${service.slug}`}
+                class="text-mckinsey-blue font-medium hover:underline flex items-center transition-all duration-300 group-hover:font-bold"
+              >
+                Saber más
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
               </a>
             </div>
-          </div>
-        ))}
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gradient-to-b from-gray-100 to-gray-200">
+    <div class="container mx-auto px-4">
+      <div
+        class="flex flex-col md:flex-row md:items-center md:justify-between mb-12"
+      >
+        <h2 class="text-4xl font-serif font-bold text-gray-800 mb-4 md:mb-0">
+          Nuestros Insights
+        </h2>
+        <a
+          href="/insights"
+          class="text-mckinsey-blue hover:text-blue-700 font-medium flex items-center"
+        >
+          Ver todos los insights
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 ml-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+          recentInsights.map((insight) => (
+            <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-2xl transition duration-300 group border border-gray-200">
+              {insight.data.image && (
+                <div class="h-52 overflow-hidden">
+                  <img
+                    src={insight.data.image}
+                    alt={insight.data.title}
+                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              )}
+              <div class="p-6">
+                <div class="mb-3 text-sm text-gray-500">
+                  {new Date(insight.data.publishDate).toLocaleDateString(
+                    "es-ES",
+                    { day: "numeric", month: "long", year: "numeric" },
+                  )}
+                </div>
+                <h3 class="text-xl font-serif font-bold mb-3 text-gray-800 group-hover:text-mckinsey-blue transition-colors duration-300">
+                  {insight.data.title}
+                </h3>
+                <p class="text-gray-600 mb-6">{insight.data.description}</p>
+                <a
+                  href={`/insights/${insight.slug}`}
+                  class="text-mckinsey-blue font-medium group-hover:font-bold transition-all duration-300 flex items-center"
+                >
+                  Leer más
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>

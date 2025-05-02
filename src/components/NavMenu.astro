@@ -6,6 +6,9 @@ const navItems = [
   { name: 'Case Studies', url: '/case-studies' },
   { name: 'Contact Us', url: '/contact' },
 ];
+
+// Para detectar la ruta actual (opcional)
+const currentPath = Astro.url.pathname;
 ---
 
 <nav class="hidden md:block">
@@ -14,11 +17,31 @@ const navItems = [
       <li>
         <a 
           href={item.url} 
-          class="text-gray-700 hover:text-mckinsey-blue text-sm font-medium py-2 border-b-2 border-transparent hover:border-mckinsey-blue transition-colors duration-200"
+          class="text-blue-100 hover:text-white text-sm font-medium py-2 border-b-2 border-transparent hover:border-blue-300 transition-all duration-200 relative group"
+          aria-current={currentPath === item.url ? 'page' : undefined}
         >
-          {item.name}
+          <span class="relative z-10">{item.name}</span>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-300 group-hover:w-full transition-all duration-300 ease-in-out"></span>
         </a>
       </li>
     ))}
   </ul>
 </nav>
+
+<script>
+  // Script opcional para marcar el elemento activo
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPath) {
+        link.classList.add('text-white', 'border-blue-300');
+        const underlineElement = link.querySelector('span:last-child');
+        if (underlineElement) {
+          underlineElement.classList.add('w-full');
+        }
+      }
+    });
+  });
+</script>

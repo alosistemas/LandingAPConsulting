@@ -1,7 +1,7 @@
 ---
 title: "Transformación Digital"
 description: "Ayudamos a las empresas a reimaginar sus operaciones con tecnologías digitales"
-image: "/images/digital-transformation.jpg"
+image: "/LandingAPConsulting/images/digital-transformation.png"
 order: 1
 ---
 

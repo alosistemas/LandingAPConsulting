@@ -2,23 +2,23 @@
 import NavMenu from './NavMenu.astro';
 ---
 
-<header class="sticky top-0 bg-white shadow-sm z-10">
+<header class="sticky top-0 bg-gradient-to-r from-blue-900 to-blue-800 shadow-lg z-10">
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <div class="flex items-center">
-      <button class="md:hidden mr-4">
+      <button class="md:hidden mr-4 text-white hover:text-blue-200 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-      <a href="/" class="flex items-center">
-        <span class="text-mckinsey-blue font-serif text-xl font-bold">McKinsey Digital</span>
+      <a href="/" class="flex items-center group">
+        <span class="text-white font-serif text-xl font-bold group-hover:text-blue-200 transition-colors">McKinsey Digital</span>
       </a>
     </div>
     <NavMenu />
     <div class="flex items-center">
-      <a href="/signin" class="text-sm mr-4 hidden md:block">Sign In</a>
-      <a href="/subscribe" class="text-sm mr-4 hidden md:block">Subscribe</a>
-      <button class="p-2">
+      <a href="/signin" class="text-sm mr-4 hidden md:block text-blue-100 hover:text-white transition-colors">Sign In</a>
+      <a href="/subscribe" class="text-sm mr-4 hidden md:block bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-md transition-colors">Subscribe</a>
+      <button class="p-2 text-white hover:text-blue-200 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
