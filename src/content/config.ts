@@ -32,8 +32,37 @@ const navCollection = defineCollection({
   })
 });
 
+const footerConfig = defineCollection({
+  type: 'content',
+  schema: z.object({
+    bgColor: z.string(),
+    textColor: z.string(),
+    borderColor: z.string(),
+    textSecondaryColor: z.string(),
+    copyright: z.string(),
+  }),
+});
+
+const footerColumns = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    type: z.enum(['about', 'links']),
+    description: z.string(),
+    links: z.array(
+      z.object({
+        title: z.string(),
+        url: z.string(),
+      })
+    ),
+  }),
+});
+
 export const collections = {
   'services': servicesCollection,
   'insights': insightsCollection,
   'nav': navCollection,
+  'config': footerConfig,
+  'footer': footerColumns,
 };

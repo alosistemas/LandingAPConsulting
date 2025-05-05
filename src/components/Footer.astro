@@ -1,39 +1,58 @@
 ---
+import { getCollection, getEntry } from 'astro:content';
+
+const footerConfigEntry = await getEntry('config', 'footer');
+
+const defaultConfig = {
+  bgColor: "#051C2C",
+  textColor: "white",
+  borderColor: "gray-700",
+  textSecondaryColor: "gray-300",
+  copyright: "Todos los derechos reservados."
+};
+
+const footerConfig = footerConfigEntry?.data || defaultConfig;
+const { bgColor, textColor, borderColor, textSecondaryColor, copyright } = footerConfig;
+
+const footerColumns = await getCollection('footer');
+const sortedColumns = footerColumns.sort((a, b) => a.data.order - b.data.order);
+
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="text-white py-12" style="background-color: #051C2C;">
+<footer class={`text-${textColor} py-12`} style={`background-color: ${bgColor};`}>
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div>
-        <h3 class="font-serif text-xl mb-4">McKinsey Digital</h3>
-        <p class="text-sm text-gray-300">Ayudamos a los clientes a desbloquear el poder de la IA a escala.</p>
-      </div>
-      <div>
-        <h4 class="font-medium mb-3">Servicios</h4>
-        <ul class="space-y-2 text-sm text-gray-300">
-          <li><a href="/services/digital-transformation" class="hover:text-white">Transformación Digital</a></li>
-          <li><a href="/services/ai-scale" class="hover:text-white">IA a Escala</a></li>
-          <li><a href="/services/digital-strategy" class="hover:text-white">Estrategia Digital</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-medium mb-3">Insights</h4>
-        <ul class="space-y-2 text-sm text-gray-300">
-          <li><a href="/insights/ai-trends" class="hover:text-white">Tendencias en IA</a></li>
-          <li><a href="/insights/digital-future" class="hover:text-white">El Futuro Digital</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-medium mb-3">Conectar</h4>
-        <ul class="space-y-2 text-sm text-gray-300">
-          <li><a href="/contact" class="hover:text-white">Contacto</a></li>
-          <li><a href="/careers" class="hover:text-white">Carreras</a></li>
-        </ul>
-      </div>
+      {
+        sortedColumns.map(column => (
+          <div>
+            <h3 class={column.data.type === 'about' ? 'font-serif text-xl mb-4' : 'font-medium mb-3'}>
+              {column.data.title}
+            </h3>
+            
+            {column.data.type === 'about' && (
+              <p class={`text-sm text-${textSecondaryColor}`}>
+                {column.data.description}
+              </p>
+            )}
+            
+            {column.data.type === 'links' && column.data.links.length > 0 && (
+              <ul class={`space-y-2 text-sm text-${textSecondaryColor}`}>
+                {column.data.links.map(link => (
+                  <li>
+                    <a href={link.url} class={`hover:text-${textColor}`}>
+                      {link.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
     </div>
-    <div class="border-t border-gray-700 mt-8 pt-8 text-sm text-gray-300">
-      <p>&copy; {currentYear} McKinsey Digital. Todos los derechos reservados.</p>
+    <div class={`border-t border-${borderColor} mt-8 pt-8 text-sm text-${textSecondaryColor}`}>
+      <p>&copy; {currentYear} McKinsey Digital. {copyright}</p>
     </div>
   </div>
 </footer>
