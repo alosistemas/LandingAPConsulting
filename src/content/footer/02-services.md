@@ -4,10 +4,12 @@ order: 2
 type: "links"
 description: ""
 links:
-  - title: "Transformación Digital"
+  - title: "Innovación"
     url: "/services/digital-transformation"
-  - title: "IA a Escala"
+  - title: "Tecnología"
     url: "/services/ai-scale"
-  - title: "Estrategia Digital"
+  - title: "Operaciones"
+    url: "/services/digital-strategy"
+  - title: "Inversiones"
     url: "/services/digital-strategy"
 ---

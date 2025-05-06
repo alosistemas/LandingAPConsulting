@@ -6,6 +6,4 @@ description: ""
 links:
   - title: "Contacto"
     url: "/contact"
-  - title: "Carreras"
-    url: "/careers"
 ---

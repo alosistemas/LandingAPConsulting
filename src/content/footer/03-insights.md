@@ -1,5 +1,5 @@
 ---
-title: "Insights"
+title: "Destacados"
 order: 3
 type: "links"
 description: ""
