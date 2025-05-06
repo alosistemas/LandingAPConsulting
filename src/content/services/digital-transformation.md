@@ -7,7 +7,7 @@ order: 1
 
 # Transformación Digital
 
-En McKinsey Digital, ayudamos a las organizaciones a reimaginar cómo crean valor a través de la tecnología digital. Nuestros expertos trabajan estrechamente con los clientes para desarrollar estrategias de transformación digital que impulsan el crecimiento y la eficiencia operativa.
+En AP Consulting, ayudamos a las organizaciones a reimaginar cómo crean valor a través de la tecnología digital. Nuestros expertos trabajan estrechamente con los clientes para desarrollar estrategias de transformación digital que impulsan el crecimiento y la eficiencia operativa.
 
 ## Nuestro Enfoque
 

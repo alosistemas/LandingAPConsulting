@@ -1,7 +1,7 @@
 ---
-title: "Contact Us"
+title: "Contáctanos"
 url: "/contact"
 order: 5
 highlight: true
-description: "Get in touch with our team"
+description: ""
 ---

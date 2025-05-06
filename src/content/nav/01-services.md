@@ -1,6 +1,6 @@
 ---
-title: "How We Help Clients"
+title: "Nuestos servicios"
 url: "/services"
 order: 1
-description: "Our comprehensive consulting services"
+description: "Servicios"
 ---

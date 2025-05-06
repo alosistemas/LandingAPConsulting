@@ -1,6 +1,6 @@
 ---
-title: "Case Studies"
+title: "Casos de éxito"
 url: "/case-studies"
 order: 4
-description: "Success stories and client outcomes"
+description: "Casos de Éxito"
 ---

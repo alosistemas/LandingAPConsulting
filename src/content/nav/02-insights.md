@@ -1,6 +1,6 @@
 ---
-title: "Our Insights"
+title: "Nuestros Productos"
 url: "/insights"
 order: 2
-description: "Industry research and expert opinions"
+description: "Productos destacados"
 ---
