@@ -3,8 +3,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://alosistemas.github.io/LandingAPConsulting/',
-  base: "LandingAPConsulting",
+  site: 'http://ap-consulting.cl/',
+  base: "/",
   vite: {
     plugins: [tailwindcss()]
   },

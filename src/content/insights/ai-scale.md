@@ -1,7 +1,7 @@
 ---
 title: "Implementando IA a Escala: Más Allá de los Proyectos Piloto"
 description: "Cómo las organizaciones pueden pasar de experimentos de IA a implementaciones a gran escala que generan valor real"
-image: "/LandingAPConsulting/images/ai-scale.png"
+image: "/images/ai-scale.png"
 publishDate: 2024-04-15
 ---
 
