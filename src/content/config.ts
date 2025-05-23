@@ -1,13 +1,22 @@
 import { defineCollection, z } from 'astro:content';
 
 const servicesCollection = defineCollection({
-  type: 'content',
   schema: z.object({
     title: z.string(),
-    description: z.string(),
-    image: z.string().optional(),
-    order: z.number(),
-  })
+    descripcion: z.string(),
+    servicios: z.array(z.string()).optional(), // servicios
+    tiposInversion: z.array(z.string()).optional(), // inversiones
+    sectores: z.array(z.string()).optional(), // inversiones
+    framework: z.array(z.string()).optional(), // inversiones
+
+    // Campos específicos opcionales
+    tendencias: z.array(z.string()).optional(), // innovación
+    beneficios: z.array(z.string()).optional(), // tecnología
+    metodologias: z.array(z.string()).optional(), // operaciones
+    resultados: z.array(z.string()).optional(), // operaciones
+    ventajas: z.array(z.string()).optional(), // propuesta integral
+    industrias: z.array(z.string()).optional(), // propuesta integral
+  }),
 });
 
 const insightsCollection = defineCollection({

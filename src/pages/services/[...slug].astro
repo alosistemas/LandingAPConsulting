@@ -1,27 +1,103 @@
 ---
-import { getCollection } from 'astro:content';
-import MainLayout from '@layouts/MainLayout.astro';
-import Hero from '@components/Hero.astro';
+import { getCollection, render } from "astro:content";
+import MainLayout from "@layouts/MainLayout.astro";
 
 export async function getStaticPaths() {
-  const servicesEntries = await getCollection('services');
-  return servicesEntries.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
+  const services = await getCollection("services");
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
   }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { service } = Astro.props;
+const { data } = service;
+const { title, descripcion } = data;
+const { Content } = await render(service);
+
+type SectionKey =
+  | "servicios"
+  | "tendencias"
+  | "beneficios"
+  | "metodologias"
+  | "resultados"
+  | "tiposInversion"
+  | "sectores"
+  | "framework"
+  | "ventajas"
+  | "industrias";
+
+const sections: { key: SectionKey; label: string }[] = [
+  { key: "servicios", label: "Servicios" },
+  { key: "tendencias", label: "Tendencias" },
+  { key: "beneficios", label: "Beneficios" },
+  { key: "metodologias", label: "Metodologías" },
+  { key: "resultados", label: "Resultados" },
+  { key: "tiposInversion", label: "Tipos de Inversión" },
+  { key: "sectores", label: "Sectores" },
+  { key: "framework", label: "Framework de Inversión" },
+  { key: "ventajas", label: "Ventajas" },
+  { key: "industrias", label: "Industrias" },
+];
+
+if (!service) {
+  throw new Error(`Servicio no encontrado para slug: ${Astro.params.slug}`);
+}
 ---
 
-<MainLayout title={`${entry.data.title} | AP Consulting`}>
-  <Hero title={entry.data.title} backgroundImage={entry.data.image} />
-  
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4 max-w-4xl prose prose-lg">
-      <Content />
+<MainLayout title={`${title} | AP Consulting`}>
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="mb-6">
+      <button
+        id="back-button"
+        type="button"
+        class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition"
+      >
+        ← Volver
+      </button>
     </div>
+    <header class="text-center max-w-3xl mx-auto mb-12">
+      <h1
+        class="text-5xl font-extrabold leading-tight tracking-tight text-gray-900 mb-4"
+      >
+        {title}
+      </h1>
+      <p class="text-xl text-gray-700 max-w-xl mx-auto">
+        {descripcion}
+      </p>
+    </header>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      {
+        sections.map(({ key, label }) =>
+          data[key] ? (
+            <section class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              <h2 class="text-2xl font-semibold text-indigo-600 mb-4 border-b-2 border-indigo-600 pb-2">
+                {label}
+              </h2>
+              <ul class="list-disc list-inside space-y-2 text-gray-700">
+                {data[key].map((item) => (
+                  <li class="hover:text-indigo-700 transition-colors duration-200">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null,
+        )
+      }
+    </div>
+
+    <article class="prose prose-indigo max-w-none mt-16">
+      <Content />
+    </article>
   </section>
+  <script>
+    const buttons = document.querySelectorAll("button#back-button");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        history.back();
+      });
+    });
+  </script>
 </MainLayout>
-```

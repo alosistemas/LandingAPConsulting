@@ -1,0 +1,106 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+
+const title = "Contacto | AP Consulting";
+const description =
+  "Contáctanos para transformar tus ideas en soluciones de valor.";
+---
+
+<MainLayout {title} {description}>
+  <section class="max-w-2xl mx-auto px-4 py-12 text-gray-800">
+    <div class="mb-6">
+      <button
+        id="back-button"
+        type="button"
+        class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition"
+      >
+        ← Volver
+      </button>
+    </div>
+    <h1 class="text-3xl font-bold mb-6">Contáctanos</h1>
+
+    <form
+      class="space-y-5"
+      action="https://formspree.io/f/xkgraekr"
+      method="POST"
+    >
+      <div>
+        <label for="name" class="block text-sm font-semibold mb-1">Nombre</label
+        >
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="w-full border border-gray-300 rounded px-3 py-2"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-semibold mb-1"
+          >Correo electrónico</label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="w-full border border-gray-300 rounded px-3 py-2"
+        />
+      </div>
+
+      <div>
+        <label for="subject" class="block text-sm font-semibold mb-1"
+          >Asunto</label
+        >
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          required
+          class="w-full border border-gray-300 rounded px-3 py-2"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-semibold mb-1"
+          >Mensaje</label
+        >
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+      >
+        Enviar mensaje
+      </button>
+    </form>
+
+    <div class="mt-10">
+      <h2 class="text-xl font-semibold mb-2">Información de contacto</h2>
+      <p><strong>Teléfono:</strong> +56 956 609 914</p>
+      <p>
+        <strong>Correo:</strong>
+        <a
+          href="mailto:jose.arana@ap-consulting.cl"
+          class="text-blue-600 underline">jose.arana@ap-consulting.cl</a
+        >
+      </p>
+    </div>
+  </section>
+  <script>
+    const buttons = document.querySelectorAll("button#back-button");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        history.back();
+      });
+    });
+  </script>
+</MainLayout>

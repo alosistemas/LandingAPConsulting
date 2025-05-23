@@ -38,7 +38,7 @@ const currentYear = new Date().getFullYear();
             
             {column.data.type === 'links' && column.data.links.length > 0 && (
               <ul class={`space-y-2 text-sm text-${textSecondaryColor}`}>
-                {column.data.links.map(link => (
+                {column.data.links.map((link: { url: string | URL | null | undefined; title: unknown; }) => (
                   <li>
                     <a href={link.url} class={`hover:text-${textColor}`}>
                       {link.title}

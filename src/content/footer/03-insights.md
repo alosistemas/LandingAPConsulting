@@ -1,11 +1,9 @@
 ---
-title: "Destacados"
+title: "Tendencias"
 order: 3
 type: "links"
 description: ""
 links:
   - title: "Tendencias en IA"
-    url: "/insights/ai-trends"
-  - title: "El Futuro Digital"
-    url: "/insights/digital-future"
+    url: "/insights/ai-scale"
 ---
