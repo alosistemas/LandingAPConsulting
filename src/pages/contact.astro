@@ -20,9 +20,11 @@ const description =
     <h1 class="text-3xl font-bold mb-6">Contáctanos</h1>
 
     <form
+      id="contact-form"
       class="space-y-5"
-      action="https://formspree.io/f/xkgraekr"
+      action="https://formspree.io/f/xvganydr"
       method="POST"
+      novalidate
     >
       <div>
         <label for="name" class="block text-sm font-semibold mb-1">Nombre</label
@@ -33,7 +35,11 @@ const description =
           name="name"
           required
           class="w-full border border-gray-300 rounded px-3 py-2"
+          aria-describedby="error-name"
         />
+        <p id="error-name" class="text-red-600 text-sm mt-1 hidden">
+          Por favor ingresa tu nombre.
+        </p>
       </div>
 
       <div>
@@ -46,7 +52,11 @@ const description =
           name="email"
           required
           class="w-full border border-gray-300 rounded px-3 py-2"
+          aria-describedby="error-email"
         />
+        <p id="error-email" class="text-red-600 text-sm mt-1 hidden">
+          Por favor ingresa un correo válido.
+        </p>
       </div>
 
       <div>
@@ -59,7 +69,11 @@ const description =
           name="subject"
           required
           class="w-full border border-gray-300 rounded px-3 py-2"
+          aria-describedby="error-subject"
         />
+        <p id="error-subject" class="text-red-600 text-sm mt-1 hidden">
+          Por favor ingresa el asunto.
+        </p>
       </div>
 
       <div>
@@ -71,7 +85,11 @@ const description =
           name="message"
           rows="5"
           required
-          class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+          class="w-full border border-gray-300 rounded px-3 py-2"
+          aria-describedby="error-message"></textarea>
+        <p id="error-message" class="text-red-600 text-sm mt-1 hidden">
+          Por favor ingresa un mensaje.
+        </p>
       </div>
 
       <button
@@ -80,6 +98,14 @@ const description =
       >
         Enviar mensaje
       </button>
+
+      <p
+        id="success-message"
+        class="mt-4 text-green-600 font-semibold hidden"
+        role="alert"
+      >
+        ¡Mensaje enviado con éxito! Gracias por contactarnos.
+      </p>
     </form>
 
     <div class="mt-10">
@@ -102,5 +128,70 @@ const description =
         history.back();
       });
     });
+
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Ocultar mensajes de error previos
+    document.getElementById("error-name")?.classList.add("hidden");
+    document.getElementById("error-email")?.classList.add("hidden");
+    document.getElementById("error-subject")?.classList.add("hidden");
+    document.getElementById("error-message")?.classList.add("hidden");
+    document.getElementById("success-message")?.classList.add("hidden");
+
+    const formData = new FormData(form);
+
+    // Validaciones manuales
+    let hasError = false;
+
+    const name = formData.get("name")?.toString();
+    if (!name || name.trim() === "") {
+      document.getElementById("error-name")?.classList.remove("hidden");
+      hasError = true;
+    }
+
+    const email = formData.get("email")?.toString();
+    // Validar email simple
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailPattern.test(email)) {
+      document.getElementById("error-email")?.classList.remove("hidden");
+      hasError = true;
+    }
+
+    const subject = formData.get("subject")?.toString();
+    if (!subject || subject.trim() === "") {
+      document.getElementById("error-subject")?.classList.remove("hidden");
+      hasError = true;
+    }
+
+    const message = formData.get("message")?.toString();
+    if (!message || message.trim() === "") {
+      document.getElementById("error-message")?.classList.remove("hidden");
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        form.reset();
+        document.getElementById("success-message")?.classList.remove("hidden");
+      } else {
+        alert("Hubo un error al enviar el mensaje. Intenta nuevamente.");
+      }
+    } catch (error) {
+      alert("Error de red al enviar el formulario.");
+    }
+  });
   </script>
 </MainLayout>

@@ -23,10 +23,11 @@ const insightsCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    description: z.string(),
-    image: z.string().optional(),
-    publishDate: z.date(),
-  })
+    category: z.string(),
+    tags: z.array(z.string()),
+    excerpt: z.string(),
+    source: z.string(),
+  }),
 });
 
 const navCollection = defineCollection({

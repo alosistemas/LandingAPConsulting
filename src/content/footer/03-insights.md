@@ -4,6 +4,8 @@ order: 3
 type: "links"
 description: ""
 links:
-  - title: "Tendencias en IA"
-    url: "/insights/ai-scale"
+  - title: "Ciberseguridad avanzada"
+    url: "/insights/ciberseguridad-avanzada"
+  - title: "Blockchain y Finanzas Descentralizadas"
+    url: "/insights/blockchain-finanzas-defi"
 ---

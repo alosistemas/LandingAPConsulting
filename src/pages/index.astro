@@ -6,11 +6,6 @@ import Hero from "@components/Hero.astro";
 // Obtener servicios y insights para mostrar en la página principal
 const services = await getCollection("services");
 const insights = await getCollection("insights");
-
-// Ordenar insights por fecha de publicación, más recientes primero
-const recentInsights = insights
-  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-  .slice(0, 3);
 ---
 
 <MainLayout title="AP Consulting - Somos tu socio tecnológico">
@@ -57,53 +52,32 @@ const recentInsights = insights
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {
-          recentInsights.map((insight) => (
-            <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-2xl transition duration-300 group border border-gray-200">
-              {insight.data.image && (
-                <div class="h-52 overflow-hidden">
-                  <img
-                    src={insight.data.image}
-                    alt={insight.data.title}
-                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              )}
-              <div class="p-6">
-                <div class="mb-3 text-sm text-gray-500">
-                  {new Date(insight.data.publishDate).toLocaleDateString(
-                    "es-ES",
-                    { day: "numeric", month: "long", year: "numeric" },
-                  )}
-                </div>
-                <h3 class="text-xl font-serif font-bold mb-3 text-gray-800 group-hover:text-mckinsey-blue transition-colors duration-300">
-                  {insight.data.title}
-                </h3>
-                <p class="text-gray-600 mb-6">{insight.data.description}</p>
-                <a
-                  href={`/insights/${insight.slug}`}
-                  class="text-mckinsey-blue font-medium group-hover:font-bold transition-all duration-300 flex items-center"
-                >
-                  Leer más
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
+     <section class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {insights.map((item) => (
+          <article class="bg-white shadow-md rounded-xl p-6 hover:shadow-xl transition">
+            <div class="text-sm text-indigo-600 font-semibold uppercase mb-2">
+              {item.data.category}
             </div>
-          ))
-        }
-      </div>
+            <h2 class="text-xl font-bold mb-2">{item.data.title}</h2>
+            <p class="text-gray-700 text-sm mb-4">{item.data.excerpt}</p>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              {item.data.tags.map((tag) => (
+                <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-2 py-1 rounded">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            <a
+              href={`/insights/${item.slug}`}
+              class="inline-block text-indigo-600 font-medium text-sm hover:underline"
+            >
+              Leer más →
+            </a>
+          </article>
+        ))}
+      </section>
     </div>
   </section>
 </MainLayout>
