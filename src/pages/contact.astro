@@ -131,67 +131,71 @@ const description =
 
     const form = document.getElementById("contact-form") as HTMLFormElement;
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    // Ocultar mensajes de error previos
-    document.getElementById("error-name")?.classList.add("hidden");
-    document.getElementById("error-email")?.classList.add("hidden");
-    document.getElementById("error-subject")?.classList.add("hidden");
-    document.getElementById("error-message")?.classList.add("hidden");
-    document.getElementById("success-message")?.classList.add("hidden");
+      // Ocultar mensajes de error previos
+      document.getElementById("error-name")?.classList.add("hidden");
+      document.getElementById("error-email")?.classList.add("hidden");
+      document.getElementById("error-subject")?.classList.add("hidden");
+      document.getElementById("error-message")?.classList.add("hidden");
+      document.getElementById("success-message")?.classList.add("hidden");
 
-    const formData = new FormData(form);
+      const formData = new FormData(form);
 
-    // Validaciones manuales
-    let hasError = false;
+      // Validaciones manuales
+      let hasError = false;
 
-    const name = formData.get("name")?.toString();
-    if (!name || name.trim() === "") {
-      document.getElementById("error-name")?.classList.remove("hidden");
-      hasError = true;
-    }
-
-    const email = formData.get("email")?.toString();
-    // Validar email simple
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailPattern.test(email)) {
-      document.getElementById("error-email")?.classList.remove("hidden");
-      hasError = true;
-    }
-
-    const subject = formData.get("subject")?.toString();
-    if (!subject || subject.trim() === "") {
-      document.getElementById("error-subject")?.classList.remove("hidden");
-      hasError = true;
-    }
-
-    const message = formData.get("message")?.toString();
-    if (!message || message.trim() === "") {
-      document.getElementById("error-message")?.classList.remove("hidden");
-      hasError = true;
-    }
-
-    if (hasError) return;
-
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        headers: {
-          Accept: "application/json",
-        },
-        body: formData,
-      });
-
-      if (response.ok) {
-        form.reset();
-        document.getElementById("success-message")?.classList.remove("hidden");
-      } else {
-        alert("Hubo un error al enviar el mensaje. Intenta nuevamente.");
+      const name = formData.get("name")?.toString();
+      const namePattern = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+      
+      if (!name || name.trim() === "" || !namePattern.test(name)) {
+        document.getElementById("error-name")?.classList.remove("hidden");
+        hasError = true;
       }
-    } catch (error) {
-      alert("Error de red al enviar el formulario.");
-    }
-  });
+
+      const email = formData.get("email")?.toString();
+      // Validar email simple
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailPattern.test(email)) {
+        document.getElementById("error-email")?.classList.remove("hidden");
+        hasError = true;
+      }
+
+      const subject = formData.get("subject")?.toString();
+      if (!subject || subject.trim() === "") {
+        document.getElementById("error-subject")?.classList.remove("hidden");
+        hasError = true;
+      }
+
+      const message = formData.get("message")?.toString();
+      if (!message || message.trim() === "") {
+        document.getElementById("error-message")?.classList.remove("hidden");
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          headers: {
+            Accept: "application/json",
+          },
+          body: formData,
+        });
+
+        if (response.ok) {
+          form.reset();
+          document
+            .getElementById("success-message")
+            ?.classList.remove("hidden");
+        } else {
+          alert("Hubo un error al enviar el mensaje. Intenta nuevamente.");
+        }
+      } catch (error) {
+        alert("Error de red al enviar el formulario.");
+      }
+    });
   </script>
 </MainLayout>
