@@ -4,6 +4,7 @@ category: "Fintech"
 tags: ["blockchain", "stablecoins", "DeFi", "pagos"]
 excerpt: "Las stablecoins y la tecnología blockchain están revolucionando las finanzas transfronterizas con mayor seguridad y eficiencia."
 source: "AI, Payments, and Digital Banking: Fintech Predictions 2025"
+link: "https://techinformed.com/fintech-predictions-2025-ai-payments-compliance/"
 image: "/images/blockchain.png"
 ---
 

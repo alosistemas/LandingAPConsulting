@@ -27,6 +27,7 @@ const insightsCollection = defineCollection({
     tags: z.array(z.string()),
     excerpt: z.string(),
     source: z.string(),
+    link: z.string(),
     image: z.string(),
   }),
 });

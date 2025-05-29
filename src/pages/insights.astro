@@ -23,8 +23,8 @@ const insights = await getCollection("insights");
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
       {
         insights.map((insight) => {
-          const { data } = insight;
-          const { title, category, tags, excerpt, source } = data;
+          const { data, slug } = insight;
+          const { title, category, tags, excerpt } = data;
           return (
             <article class="bg-white rounded-xl p-8 border border-gray-200 hover:shadow-2xl transition duration-300 group relative overflow-hidden">
               <div class="absolute top-0 left-0 w-2 h-full bg-[#00338D] opacity-75" />
@@ -41,12 +41,10 @@ const insights = await getCollection("insights");
                 ))}
               </div>
               <a
-                href={source}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/insights/${slug}`}
                 class="text-[#00338D] font-medium hover:underline flex items-center transition-all duration-300 group-hover:font-bold"
               >
-                Ver fuente
+                Leer más
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
