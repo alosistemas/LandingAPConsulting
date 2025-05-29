@@ -4,6 +4,7 @@ category: "Ciberseguridad"
 tags: ["biometría", "zero trust", "seguridad", "fintech"]
 excerpt: "Tendencias clave como la autenticación comportamental y la arquitectura Zero Trust están transformando el panorama de seguridad digital."
 source: "Hidden Fintech Trends 2025 / Digital banking in 2025"
+image: "/images/ciberseguridad.png"
 ---
 
 ## Autenticación Comportamental

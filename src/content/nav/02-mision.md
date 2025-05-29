@@ -1,6 +1,6 @@
 ---
 title: "Misión"
-url: "#mision"
+url: "/#mision"
 order: 2
 description: "Nuestra Misión"
 ---

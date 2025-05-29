@@ -1,6 +1,6 @@
 ---
 title: "Tendencias"
-url: "#tendencias"
+url: "/#tendencias"
 order: 4
 description: "Tendencias"
 ---

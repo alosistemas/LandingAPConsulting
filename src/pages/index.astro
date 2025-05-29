@@ -12,8 +12,10 @@ const insights = await getCollection("insights");
   <Hero services={services} />
   <section id="mision" class="py-20 bg-white">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-4xl font-serif font-bold text-gray-800 mb-6">
-        Nuestra Misión
+      <h2
+        class="text-4xl font-serif font-bold text-gray-800 mb-6"
+        data-typewriter="Nuestra Misión"
+      >
       </h2>
       <p class="text-lg text-gray-600 max-w-3xl mx-auto">
         En AP Consulting, nuestra misión es transformar la tecnología en una
@@ -25,7 +27,10 @@ const insights = await getCollection("insights");
       </p>
     </div>
   </section>
-  <section id="tendencias" class="py-20 bg-gradient-to-b from-gray-100 to-gray-200">
+  <section
+    id="tendencias"
+    class="py-20 bg-gradient-to-b from-gray-100 to-gray-200"
+  >
     <div class="container mx-auto px-4">
       <div
         class="flex flex-col md:flex-row md:items-center md:justify-between mb-12"
@@ -52,32 +57,49 @@ const insights = await getCollection("insights");
         </a>
       </div>
 
-     <section class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {insights.map((item) => (
-          <article class="bg-white shadow-md rounded-xl p-6 hover:shadow-xl transition">
-            <div class="text-sm text-indigo-600 font-semibold uppercase mb-2">
-              {item.data.category}
-            </div>
-            <h2 class="text-xl font-bold mb-2">{item.data.title}</h2>
-            <p class="text-gray-700 text-sm mb-4">{item.data.excerpt}</p>
+      <section class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          insights.map((item) => (
+            <article class="bg-white shadow-md rounded-xl p-6 hover:shadow-xl transition">
+              <img
+                src={item.data.image}
+                alt={item.data.title}
+                class="w-full h-48 object-cover rounded-lg mb-4"
+              />
+              <div class="text-sm text-indigo-600 font-semibold uppercase mb-2">
+                {item.data.category}
+              </div>
+              <h2
+                class="text-xl font-bold mb-2"
+                data-typewriter={item.data.title}
+              />
+              <p class="text-gray-700 text-sm mb-4">{item.data.excerpt}</p>
 
-            <div class="flex flex-wrap gap-2 mb-4">
-              {item.data.tags.map((tag) => (
-                <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-2 py-1 rounded">
-                  #{tag}
-                </span>
-              ))}
-            </div>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {item.data.tags.map((tag) => (
+                  <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-2 py-1 rounded">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
 
-            <a
-              href={`/insights/${item.slug}`}
-              class="inline-block text-indigo-600 font-medium text-sm hover:underline"
-            >
-              Leer más →
-            </a>
-          </article>
-        ))}
+              <a
+                href={`/insights/${item.slug}`}
+                class="inline-block text-indigo-600 font-medium text-sm hover:underline"
+              >
+                Leer más →
+              </a>
+            </article>
+          ))
+        }
       </section>
     </div>
   </section>
+  <script type="module" is:inline>
+    import { observeTypewriter } from "/src/scripts/typewriter.js";
+
+    window.addEventListener("DOMContentLoaded", () => {
+      observeTypewriter("[data-typewriter]");
+    });
+  </script>
 </MainLayout>
