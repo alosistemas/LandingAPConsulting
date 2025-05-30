@@ -1,19 +1,67 @@
 ---
-import NavMenu from './NavMenu.astro';
+import { getCollection } from "astro:content";
+import NavMenu from "./NavMenu.astro";
+
+const navItemsCollection = await getCollection("nav");
 ---
 
-<header class="sticky top-0 bg-gradient-to-r from-blue-900 to-blue-800 shadow-lg z-10">
+<header
+  class="sticky top-0 bg-gradient-to-r from-blue-900 to-blue-800 shadow-lg z-10"
+>
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <div class="flex items-center">
-      <button class="md:hidden mr-4 text-white hover:text-blue-200 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      <button
+        id="menu-toggle"
+        type="button"
+        class="md:hidden mr-4 text-white hover:text-blue-200 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
       <a href="/" class="flex items-center group">
-        <span class="text-white font-serif text-xl font-bold group-hover:text-blue-200 transition-colors">AP Consulting</span>
+        <span
+          class="text-white font-serif text-xl font-bold group-hover:text-blue-200 transition-colors"
+          >AP Consulting</span
+        >
       </a>
     </div>
     <NavMenu />
   </div>
+  <nav id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+    <ul class="flex flex-col space-y-3">
+      {
+        navItemsCollection.map((item) => {
+          const { title, url } = item.data;
+          return (
+            <li>
+              <a
+                href={url}
+                class="block text-blue-100 hover:text-white text-sm font-medium py-2 border-b border-blue-800"
+              >
+                {title}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+  <script type="module" is:inline>
+    const btn = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    btn?.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  </script>
 </header>
