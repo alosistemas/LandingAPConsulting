@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+.demo-banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #f1c40f;
+  color: #000;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.demo-banner.hidden {
+  transform: translateY(100%);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}

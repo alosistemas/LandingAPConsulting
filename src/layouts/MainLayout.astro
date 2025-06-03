@@ -1,16 +1,19 @@
 ---
-import Header from '@components/Header.astro';
-import Footer from '@components/Footer.astro';
-import '@styles/global.css'
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import "@styles/global.css";
 
 interface Props {
   title: string;
   description?: string;
 }
-const { title, description = "AP Consulting - Consultoría - Innovación - Inversiones - Operaciones  Tecnología - Valor Integral" } = Astro.props;
+const {
+  title,
+  description = "AP Consulting - Consultoría - Innovación - Inversiones - Operaciones  Tecnología - Valor Integral",
+} = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -22,9 +25,31 @@ const { title, description = "AP Consulting - Consultoría - Innovación - Inver
   </head>
   <body class="font-sans bg-[#DCE6F2]">
     <Header />
+    <div id="demo-banner" class="demo-banner">
+      ⚠️ Esta página es solo una demostración. Si quiere más información,
+      comunicarse al correo:
+      <a href="mailto:info@alosistemas.com">info@alosistemas.com</a>
+      <button class="close-btn" id="close-btn">✕</button>
+    </div>
     <main>
       <slot />
     </main>
     <Footer />
+    <script is:inline type="module">
+      import { observeTypewriter } from "/scripts/typewriter.js";
+
+      window.addEventListener("DOMContentLoaded", () => {
+        observeTypewriter("[data-typewriter]");
+      });
+      const banner = document.getElementById("demo-banner");
+      const closeBtn = document.getElementById("close-btn");
+
+      closeBtn.addEventListener("click", () => {
+        banner.classList.add("hidden");
+        setTimeout(() => {
+          banner?.classList.remove("hidden");
+        }, 30000); // 30s
+      });
+    </script>
   </body>
 </html>
