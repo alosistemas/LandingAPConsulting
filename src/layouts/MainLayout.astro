@@ -25,12 +25,12 @@ const {
   </head>
   <body class="font-sans bg-[#DCE6F2]">
     <Header />
-    <div id="demo-banner" class="demo-banner">
+    <!-- <div id="demo-banner" class="demo-banner">
       ⚠️ Esta página es solo una demostración. Si quiere más información,
       comunicarse al correo:
       <a href="mailto:info@alosistemas.com">info@alosistemas.com</a>
       <button class="close-btn" id="close-btn">✕</button>
-    </div>
+    </div> -->
     <main>
       <slot />
     </main>
@@ -41,15 +41,15 @@ const {
       window.addEventListener("DOMContentLoaded", () => {
         observeTypewriter("[data-typewriter]");
       });
-      const banner = document.getElementById("demo-banner");
-      const closeBtn = document.getElementById("close-btn");
+      //const banner = document.getElementById("demo-banner");
+      //const closeBtn = document.getElementById("close-btn");
 
-      closeBtn.addEventListener("click", () => {
-        banner.classList.add("hidden");
-        setTimeout(() => {
-          banner?.classList.remove("hidden");
-        }, 30000); // 30s
-      });
+      //closeBtn.addEventListener("click", () => {
+      //  banner.classList.add("hidden");
+      //  setTimeout(() => {
+      //    banner?.classList.remove("hidden");
+      //  }, 30000); // 30s
+      //});
     </script>
   </body>
 </html>
